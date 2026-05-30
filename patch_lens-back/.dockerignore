@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+*.log
+_*.txt
+_*.json
+# 131MB 원본 CSV는 런타임 불필요 (model_result_enriched.csv만 사용)
+data/nomans_processed.csv
+data/nomans_reviews_flat_en__.csv

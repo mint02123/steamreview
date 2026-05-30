@@ -1,0 +1,41 @@
+# 로컬 통합 테스트용: 백엔드(FastAPI) + Postgres
+# 실행:  docker compose up --build
+# 정리:  docker compose down -v
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: patch_user
+      POSTGRES_PASSWORD: patch_lens_1234
+      POSTGRES_DB: patch_lens
+    ports:
+      - "5433:5432"          # 로컬 5432와 충돌 피하려고 호스트는 5433로 노출
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U patch_user -d patch_lens"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build: ./patch_lens-back
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      # 컨테이너 간 통신은 서비스명(db):5432 사용
+      DATABASE_URL: postgresql+psycopg2://patch_user:patch_lens_1234@db:5432/patch_lens
+      JWT_SECRET_KEY: local-compose-secret-change-me
+      JWT_ALGORITHM: HS256
+      ACCESS_TOKEN_EXPIRE_MINUTES: "1440"
+      SOURCE_TOTAL_REVIEWS: "227120"
+      CORS_ORIGINS: "http://localhost:5173,http://127.0.0.1:5173"
+      # ANTHROPIC_API_KEY 는 셸 환경변수에서 전달 (없으면 fallback_insight 동작)
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      ANTHROPIC_MODEL: claude-haiku-4-5
+    ports:
+      - "8000:8000"
+
+volumes:
+  pgdata:
