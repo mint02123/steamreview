@@ -1,0 +1,6 @@
+{
+  "EgressConfiguration": {
+    "EgressType": "VPC",
+    "VpcConnectorArn": "arn:aws:apprunner:ap-northeast-1:510490942540:vpcconnector/patch-lens-vpc-connector-private/1/6892b5c0dfa8401dbdb07daafb0fdb94"
+  }
+}

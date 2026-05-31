@@ -1,0 +1,5 @@
+{
+  "Cpu": "1024",
+  "Memory": "2048",
+  "InstanceRoleArn": "arn:aws:iam::510490942540:role/patch-lens-apprunner-instance-role"
+}

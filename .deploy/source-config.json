@@ -1,0 +1,25 @@
+{
+  "ImageRepository": {
+    "ImageIdentifier": "510490942540.dkr.ecr.ap-northeast-1.amazonaws.com/patch-lens-backend:latest",
+    "ImageRepositoryType": "ECR",
+    "ImageConfiguration": {
+      "Port": "8000",
+      "RuntimeEnvironmentVariables": {
+        "ANTHROPIC_MODEL": "claude-haiku-4-5",
+        "JWT_ALGORITHM": "HS256",
+        "ACCESS_TOKEN_EXPIRE_MINUTES": "1440",
+        "SOURCE_TOTAL_REVIEWS": "227120",
+        "CORS_ORIGINS": "http://localhost:5173"
+      },
+      "RuntimeEnvironmentSecrets": {
+        "DATABASE_URL": "arn:aws:secretsmanager:ap-northeast-1:510490942540:secret:patch-lens/DATABASE_URL-N4vxSR",
+        "JWT_SECRET_KEY": "arn:aws:secretsmanager:ap-northeast-1:510490942540:secret:patch-lens/JWT_SECRET_KEY-aJLQzj",
+        "ANTHROPIC_API_KEY": "arn:aws:secretsmanager:ap-northeast-1:510490942540:secret:patch-lens/ANTHROPIC_API_KEY-tPTd2D"
+      }
+    }
+  },
+  "AutoDeploymentsEnabled": false,
+  "AuthenticationConfiguration": {
+    "AccessRoleArn": "arn:aws:iam::510490942540:role/patch-lens-apprunner-access-role"
+  }
+}
