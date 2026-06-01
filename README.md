@@ -119,6 +119,7 @@ steamreview/
 # ANTHROPIC_API_KEY 없으면 fallback_insight로 동작
 export ANTHROPIC_API_KEY=sk-ant-...
 docker compose up --build          # backend :8000, postgres :5433(호스트)
+curl http://localhost:8000/api/health   # 기동 확인 (정상 시 200)
 docker compose down -v             # 정리
 ```
 
